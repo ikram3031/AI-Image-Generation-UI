@@ -48,6 +48,23 @@ const Home = () => {
     fetchPosts();
   }, []);
 
+  const handleSearchChange = (e) => {
+    clearTimeout(searchTimeout);
+
+    setSearchText(e.target.value);
+
+    setSearchTimeout(
+      setTimeout(() => {
+        const searchResult = allPosts.filter((item) =>
+          item.name.
+            toLowerCase().includes(searchText.toLowerCase()) ||
+          item.prompt.toLowerCase().includes(searchText.toLowerCase()));
+
+        setSearchedResults(searchResult);
+      }, 500),
+    );
+  }
+
   return (
     <section className="max-w-7xl mx-auto">
       <div>
@@ -66,7 +83,14 @@ const Home = () => {
       </div>
 
       <div className="mt-16">
-        <FormField />
+        <FormField
+          labelName="Search Pots"
+          type="text"
+          name="text"
+          placeholder="Input Search Text Here"
+          value={searchText} 
+          handleChange={handleSearchChange}
+        />
       </div>
 
       <div className="mt-10">
@@ -86,7 +110,7 @@ const Home = () => {
             >
               {searchText ? (
                 <RenderCards
-                  data={allPosts}
+                  data={searchedResults}
                   title="No Search Results Found"
                 />
               ) : (

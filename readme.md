@@ -2,9 +2,8 @@ Frontend
 * React
 * Frontend Tool: Vite
 * Tailwind CSS
+* Search
 
 Backend
-* Cloudinary
-* cors
-* dotenv
-* openai
+* Cloudinary File Upload Service
+* OpenAI External API
